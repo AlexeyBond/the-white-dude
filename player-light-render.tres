@@ -1,0 +1,60 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://d3alq2kn0enmd"]
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_rimu1"]
+parameter_name = "opacity"
+hint = 1
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_gsol0"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_cbhfs"]
+default_input_values = [0, 1.0, 1, 0.0]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_0cx8w"]
+input_name = "color"
+
+[resource]
+code = "shader_type canvas_item;
+uniform float opacity : hint_range(0, 1);
+
+
+
+void fragment() {
+// Input:8
+	vec4 n_out8p0 = COLOR;
+
+
+// FloatParameter:4
+	float n_out4p0 = opacity;
+
+
+// FloatOp:7
+	float n_in7p0 = 1.00000;
+	float n_out7p0 = n_in7p0 + n_out4p0;
+
+
+// VectorOp:6
+	vec4 n_out6p0 = n_out8p0 * vec4(n_out7p0);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out6p0.xyz);
+	COLOR.a = n_out4p0;
+
+
+}
+"
+graph_offset = Vector2(-441.817, -60.3952)
+mode = 1
+flags/light_only = false
+nodes/fragment/4/node = SubResource("VisualShaderNodeFloatParameter_rimu1")
+nodes/fragment/4/position = Vector2(-420, 300)
+nodes/fragment/6/node = SubResource("VisualShaderNodeVectorOp_gsol0")
+nodes/fragment/6/position = Vector2(120, 40)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatOp_cbhfs")
+nodes/fragment/7/position = Vector2(-60, 140)
+nodes/fragment/8/node = SubResource("VisualShaderNodeInput_0cx8w")
+nodes/fragment/8/position = Vector2(-260, 0)
+nodes/fragment/connections = PackedInt32Array(4, 0, 0, 1, 6, 0, 0, 0, 7, 0, 6, 1, 4, 0, 7, 1, 8, 0, 6, 0)

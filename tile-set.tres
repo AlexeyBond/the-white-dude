@@ -1,0 +1,28 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://kwjg0cuq31q5"]
+
+[ext_resource type="Texture2D" uid="uid://cdveos1rkkqns" path="res://art/tile-0000.png" id="1_qpgg6"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y5tnd"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_71mp2"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_djr50"]
+resource_name = "wall-h-m"
+texture = ExtResource("1_qpgg6")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+0:0/0/physics_layer_1/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_1/angular_velocity = 0.0
+0:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[resource]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_y5tnd")
+physics_layer_1/collision_layer = 2
+physics_layer_1/collision_mask = 2
+physics_layer_1/physics_material = SubResource("PhysicsMaterial_71mp2")
+sources/0 = SubResource("TileSetAtlasSource_djr50")

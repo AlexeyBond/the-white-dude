@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://brqyv4s1gu1u6"]
+
+[ext_resource type="Shader" path="res://player-light-particles.gdshader" id="1_s4ag4"]
+[ext_resource type="Texture2D" uid="uid://b25xl37coa57" path="res://art/player-0012.png" id="2_hq8bg"]
+
+[resource]
+shader = ExtResource("1_s4ag4")
+shader_parameter/transition_duration = 1.0
+shader_parameter/transition = 0.0
+shader_parameter/emission_texture = ExtResource("2_hq8bg")
