@@ -1,0 +1,16 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://r3bb4fwxktme"]
+
+[ext_resource type="Texture2D" uid="uid://h1i2lf67jd8m" path="res://art/tile-0001.png" id="1_i1lpn"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oi12d"]
+texture = ExtResource("1_i1lpn")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/2 = SubResource("TileSetAtlasSource_oi12d")

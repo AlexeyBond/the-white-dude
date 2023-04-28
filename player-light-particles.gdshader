@@ -21,7 +21,7 @@ void start() {
 	
 	vec2 numV = vec2(float(numX), float(numY));
 	vec2 pos_i = vec2(float(ix), float(iy));
-	vec2 pos_uv = pos_i / numV;
+	vec2 pos_uv = (pos_i + 0.5) / (numV + 1.0);
 	vec2 pos = (pos_i - 0.5 * numV) * vec2(dstX, dstY);
 	
 	COLOR = texture(emission_texture, pos_uv);

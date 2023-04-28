@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cowlk6ot1uemo"]
+[gd_scene load_steps=13 format=3 uid="uid://cowlk6ot1uemo"]
 
 [ext_resource type="Script" path="res://player-light.gd" id="1_oq6ga"]
 [ext_resource type="Shader" uid="uid://d3alq2kn0enmd" path="res://player-light-render.tres" id="1_vxcwo"]
@@ -10,8 +10,9 @@
 shader = ExtResource("1_vxcwo")
 shader_parameter/opacity = 1.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogy4y"]
-size = Vector2(72, 121)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rdyp"]
+radius = 36.0
+height = 121.79
 
 [sub_resource type="Animation" id="Animation_lbysg"]
 length = 0.001
@@ -164,7 +165,12 @@ _data = {
 "to_light": SubResource("Animation_8brnf")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8yipe"]
+radius = 18.0
+
 [node name="PlayerLight" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_oq6ga")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
@@ -179,7 +185,7 @@ trail_lifetime = 0.7
 
 [node name="materialization-collider" type="CollisionShape2D" parent="."]
 position = Vector2(-6, 2.5)
-shape = SubResource("RectangleShape2D_ogy4y")
+shape = SubResource("CapsuleShape2D_5rdyp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -188,3 +194,18 @@ libraries = {
 
 [node name="material_player_afterimage" type="Sprite2D" parent="."]
 texture = ExtResource("5_okyms")
+
+[node name="optical_body" type="CharacterBody2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="optical_body"]
+shape = SubResource("CircleShape2D_8yipe")
+
+[node name="ColorRect" type="ColorRect" parent="optical_body"]
+visible = false
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+color = Color(1, 0, 0, 1)

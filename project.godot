@@ -53,6 +53,7 @@ game_down={
 
 2d_physics/layer_1="hard"
 2d_physics/layer_2="opaque"
+2d_physics/layer_3="reflective"
 
 [rendering]
 
