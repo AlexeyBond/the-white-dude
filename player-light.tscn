@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cowlk6ot1uemo"]
 
-[ext_resource type="Script" path="res://player-light.gd" id="1_gttcc"]
+[ext_resource type="Script" path="res://player-light.gd" id="1_oq6ga"]
 [ext_resource type="Shader" uid="uid://d3alq2kn0enmd" path="res://player-light-render.tres" id="1_vxcwo"]
 [ext_resource type="Material" uid="uid://brqyv4s1gu1u6" path="res://player-light-particles.tres" id="2_rlfqf"]
 [ext_resource type="Texture2D" uid="uid://b4lpu3n7vtphn" path="res://dot.png" id="3_hgom2"]
@@ -12,58 +12,6 @@ shader_parameter/opacity = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ogy4y"]
 size = Vector2(72, 121)
-
-[sub_resource type="Animation" id="Animation_8brnf"]
-resource_name = "to_light"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles2D:process_material:shader_parameter/transition")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.3, 0.7),
-"transitions": PackedFloat32Array(1, 0.366021, 1),
-"update": 0,
-"values": [0.0, 0.232, 1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("material_player_afterimage:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GPUParticles2D:material:shader_parameter/opacity")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:move_velocity_factor")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.3),
-"transitions": PackedFloat32Array(1, 0.183011, 0.143587),
-"update": 0,
-"values": [0.0, 0.0, 1.0]
-}
 
 [sub_resource type="Animation" id="Animation_lbysg"]
 length = 0.001
@@ -157,6 +105,58 @@ tracks/3/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_8brnf"]
+resource_name = "to_light"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:process_material:shader_parameter/transition")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3, 0.7),
+"transitions": PackedFloat32Array(1, 0.366021, 1),
+"update": 0,
+"values": [0.0, 0.232, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("material_player_afterimage:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D:material:shader_parameter/opacity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:move_velocity_factor")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.3),
+"transitions": PackedFloat32Array(1, 0.183011, 0.143587),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vdef1"]
 _data = {
 "RESET": SubResource("Animation_lbysg"),
@@ -165,8 +165,7 @@ _data = {
 }
 
 [node name="PlayerLight" type="CharacterBody2D"]
-script = ExtResource("1_gttcc")
-move_velocity_factor = 1.0
+script = ExtResource("1_oq6ga")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_d8ln4")

@@ -39,7 +39,11 @@ func _on_sprite_animation_looped():
 	if sprite.animation.begins_with("idle-"):
 		var r = randf()
 		
-		if r < 0.1:
+		if r < 0.002:
+			sprite.animation = &"idle-4"
+		elif r < 0.05:
+			sprite.animation = &"idle-3"
+		elif r < 0.15:
 			sprite.animation = &"idle-2"
 		else:
 			sprite.animation = &"idle-1"
@@ -47,6 +51,9 @@ func _on_sprite_animation_looped():
 var light_scene = preload("res://player-light.tscn")
 
 func do_transform():
+	if not is_on_floor():
+		return
+	
 	var direction = Vector2(
 		Input.get_axis("game_left", "game_right"),
 		Input.get_axis("game_up", "game_down")
@@ -59,8 +66,12 @@ func do_transform():
 	
 	direction = direction / l
 	
-	var as_light: PlayerLight = light_scene.instantiate()
-	
+	var a = direction.angle()
+	a -= fmod(a, PI * 0.5)
+	direction = Vector2(1,0).rotated(a)
+
+	var as_light = light_scene.instantiate()
+
 	as_light.global_position = global_position
 	as_light.move_direction = direction
 
