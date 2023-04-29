@@ -7,7 +7,7 @@ var current_index: int = 0
 
 var is_moving: bool = false
 
-var auto_move: bool = true
+@export var auto_move: bool = false
 
 signal started;
 signal stopped;

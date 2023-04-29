@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The White Dude"
-run/main_scene="res://game.tscn"
+run/main_scene="res://test_room.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -27,7 +27,7 @@ window/size/mode=3
 
 [input]
 
-game_transform={
+game_act={
 "deadzone": 0.1,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":9,"pressure":0.0,"pressed":true,"script":null)
@@ -76,6 +76,7 @@ game_down={
 2d_physics/layer_1="hard"
 2d_physics/layer_2="opaque"
 2d_physics/layer_3="reflective"
+2d_physics/layer_17="interactive"
 
 [rendering]
 

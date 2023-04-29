@@ -8,6 +8,9 @@ const FALL_TIME_TO_ANIMATE = 0.1
 
 @onready var sprite = $AnimatedSprite2D
 
+@onready var interact_left: Area2D = $interact_left
+@onready var interact_right: Area2D = $interact_right
+
 func _ready():
 	sprite.play("idle-1")
 
@@ -29,7 +32,7 @@ func _physics_process(delta):
 		
 		if direction:
 			sprite.animation = &"walk"
-		elif not sprite.animation.begins_with("idle-"):
+		elif sprite.animation == &"walk" or sprite.animation == &"fall":
 			sprite.animation = &"idle-1"
 
 	move_and_slide()
@@ -48,24 +51,15 @@ func _on_sprite_animation_looped():
 		else:
 			sprite.animation = &"idle-1"
 
+func _on_sprite_animation_finished():
+	if sprite.animation == &"act-left":
+		sprite.play(&"idle-1")
+	elif sprite.animation == &"act-right":
+		sprite.play(&"idle-1")
+
 var light_scene = preload("res://player-light.tscn")
 
-func do_transform():
-	if not is_on_floor():
-		return
-	
-	var direction = Vector2(
-		Input.get_axis("game_left", "game_right"),
-		Input.get_axis("game_up", "game_down")
-	)
-	
-	var l = direction.length()
-	
-	if l < 0.5:
-		return
-	
-	direction = direction / l
-	
+func do_transform(direction: Vector2):
 	var a = direction.angle()
 	a -= fmod(a, PI * 0.5)
 	direction = Vector2(1,0).rotated(a)
@@ -79,9 +73,37 @@ func do_transform():
 
 	queue_free()
 
+func do_interact(area: Area2D, animation: StringName):
+	sprite.animation = animation
+
+	for other_area in area.get_overlapping_areas():
+		other_area.interact()
+
+func handle_action_pressed():
+	if not is_on_floor():
+		return
+
+	var direction = Vector2(
+		Input.get_axis("game_left", "game_right"),
+		Input.get_axis("game_up", "game_down")
+	)
+
+	var l = direction.length()
+
+	if l < 0.5:
+		if interact_left.has_overlapping_areas():
+			do_interact(interact_left, &"act-left")
+		elif interact_right.has_overlapping_areas():
+			do_interact(interact_right, &"act-right")
+
+		return
+
+	do_transform(direction / l)
+
 func _process(_delta):
-	if Input.is_action_just_pressed("game_transform"):
-		do_transform()
+	if Input.is_action_just_pressed("game_act"):
+		handle_action_pressed()
+
 
 
 

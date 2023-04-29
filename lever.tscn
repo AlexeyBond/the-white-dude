@@ -1,7 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://c28x552tuvqum"]
+[gd_scene load_steps=7 format=3 uid="uid://c28x552tuvqum"]
+
+[ext_resource type="Script" path="res://lever.gd" id="1_uqro5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_adniu"]
-size = Vector2(64, 64)
+size = Vector2(16, 64)
+
+[sub_resource type="Animation" id="Animation_iohk7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.261799]
+}
 
 [sub_resource type="Animation" id="Animation_mj1sc"]
 resource_name = "turn_on"
@@ -19,21 +36,6 @@ tracks/0/keys = {
 "values": [-0.261799, -0.0872665, 0.0872665, 0.261799]
 }
 
-[sub_resource type="Animation" id="Animation_iohk7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect2:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.261799]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fvlo8"]
 _data = {
 "RESET": SubResource("Animation_iohk7"),
@@ -41,9 +43,12 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqtqj"]
-size = Vector2(64, 32)
+size = Vector2(36, 32)
 
 [node name="lever" type="Area2D"]
+collision_layer = 65536
+collision_mask = 65536
+script = ExtResource("1_uqro5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_adniu")

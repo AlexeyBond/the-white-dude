@@ -80,9 +80,11 @@ layer_0/tile_data = PackedInt32Array(-65535, 458753, 2, 1, 131073, 1, -131071, 6
 position = Vector2(191, 0)
 
 [node name="lever" parent="." instance=ExtResource("8_2h04x")]
-position = Vector2(421, 756)
+position = Vector2(527, 468)
+target_path = NodePath("../MovingObject")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_tvvw6")
+volume_db = -14.365
 script = SubResource("GDScript_ntd7w")
 in_hard_body_filter = SubResource("AudioEffectEQ21_n5efr")
