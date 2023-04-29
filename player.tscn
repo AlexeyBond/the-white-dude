@@ -7,12 +7,13 @@
 size = Vector2(72, 116)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = -1
 script = ExtResource("1_4q0gk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_6el7x")
 animation = &"idle-1"
-frame_progress = 0.310554
+frame_progress = 0.935826
 
 [node name="material_collider" type="CollisionShape2D" parent="."]
 position = Vector2(-6, 6)
