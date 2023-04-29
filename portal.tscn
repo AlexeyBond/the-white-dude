@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://fpmpy5157v31"]
+
+[ext_resource type="Texture2D" uid="uid://0sgdv2jud2hx" path="res://art/portal.png" id="1_jv30v"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k5ody"]
+
+[sub_resource type="Curve" id="Curve_51dv6"]
+_data = [Vector2(0, 0.745454), 0.0, 0.0, 0, 0, Vector2(0.232026, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pxdxe"]
+curve = SubResource("Curve_51dv6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lxw8p"]
+lifetime_randomness = 0.68
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_pxdxe")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+turbulence_enabled = true
+turbulence_noise_strength = 12.24
+turbulence_noise_scale = 10.0
+turbulence_noise_speed_random = 9.7
+turbulence_influence_min = 1.0
+turbulence_influence_max = 1.0
+turbulence_initial_displacement_min = -3.6
+turbulence_initial_displacement_max = 6.1
+
+[node name="portal" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_k5ody")
+process_material = SubResource("ParticleProcessMaterial_lxw8p")
+texture = ExtResource("1_jv30v")
+lifetime = 3.0

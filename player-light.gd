@@ -58,34 +58,3 @@ func _physics_process(delta):
 			last_optical_collider = optical_collision.get_collider()
 	else:
 		last_optical_collider = null
-
-
-var tail_emission_remainder = 0.0
-
-func emit_tail_particles(delta):
-	var emitter: GPUParticles2D = get_node("../tail_particles")
-	
-	if not emitter:
-		return
-	
-	tail_emission_remainder += delta
-	
-	while tail_emission_remainder >= SECONDS_PER_TAIL_PARTICLE:
-		tail_emission_remainder -= SECONDS_PER_TAIL_PARTICLE
-		var particle_transform = Transform2D()
-		
-		particle_transform.origin = self.global_position
-		
-		emitter.emit_particle(
-			particle_transform,
-			Vector2.ZERO,
-			Color.WHITE,
-			Color.WHITE,
-			GPUParticles2D.EMIT_FLAG_POSITION,
-		)
-
-#func _process(delta):
-#	if move_velocity_factor > 0.01 or move_speed > 0.01:
-#		emit_tail_particles(delta)
-
-
