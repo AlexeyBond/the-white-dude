@@ -39,7 +39,7 @@ func _on_sprite_animation_looped():
 	if sprite.animation.begins_with("idle-"):
 		var r = randf()
 		
-		if r < 0.002:
+		if r < 0.01:
 			sprite.animation = &"idle-4"
 		elif r < 0.05:
 			sprite.animation = &"idle-3"
@@ -79,10 +79,9 @@ func do_transform():
 
 	queue_free()
 
-func _unhandled_key_input(event: InputEvent):
-	if event.is_action("game_transform"):
+func _process(_delta):
+	if Input.is_action_just_pressed("game_transform"):
 		do_transform()
-
 
 
 

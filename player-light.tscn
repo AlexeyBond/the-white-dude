@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://cowlk6ot1uemo"]
+[gd_scene load_steps=14 format=3 uid="uid://cowlk6ot1uemo"]
 
 [ext_resource type="Script" path="res://player-light.gd" id="1_oq6ga"]
 [ext_resource type="Shader" uid="uid://d3alq2kn0enmd" path="res://player-light-render.tres" id="1_vxcwo"]
 [ext_resource type="Material" uid="uid://brqyv4s1gu1u6" path="res://player-light-particles.tres" id="2_rlfqf"]
 [ext_resource type="Texture2D" uid="uid://b4lpu3n7vtphn" path="res://dot.png" id="3_hgom2"]
 [ext_resource type="Texture2D" uid="uid://c2ao0j46x5xiu" path="res://art/player-0000.png" id="5_okyms"]
+[ext_resource type="Material" uid="uid://db2eg40k0psws" path="res://player-tail-particles.material" id="6_qawkf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d8ln4"]
 shader = ExtResource("1_vxcwo")
@@ -172,6 +173,10 @@ radius = 18.0
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_oq6ga")
+
+[node name="tail_emitter" type="GPUParticles2D" parent="."]
+amount = 2048
+process_material = ExtResource("6_qawkf")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_d8ln4")
