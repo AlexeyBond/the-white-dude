@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dijxa8a80fnya"]
+[gd_scene load_steps=8 format=3 uid="uid://dijxa8a80fnya"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_k16ff"]
 [ext_resource type="PackedScene" uid="uid://dw86omwutt337" path="res://levels/level1.tscn" id="2_pb10j"]
+[ext_resource type="AudioStream" uid="uid://c2dgbu62nstpw" path="res://sound/music-0.mp3" id="3_yimot"]
 
 [sub_resource type="Animation" id="Animation_pcg2v"]
 resource_name = "change_scene"
@@ -77,6 +78,16 @@ _data = {
 "change_scene": SubResource("Animation_pcg2v")
 }
 
+[sub_resource type="GDScript" id="GDScript_pr4j6"]
+script/source = "extends AudioStreamPlayer
+
+
+@export var in_hard_body_filter: AudioEffectEQ21 = AudioEffectEQ21.new()
+
+func _ready():
+	play()
+"
+
 [node name="game" type="CanvasLayer"]
 script = ExtResource("1_k16ff")
 
@@ -94,3 +105,7 @@ grow_vertical = 2
 libraries = {
 "": SubResource("AnimationLibrary_bemsm")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_yimot")
+script = SubResource("GDScript_pr4j6")

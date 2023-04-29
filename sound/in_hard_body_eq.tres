@@ -1,0 +1,21 @@
+[gd_resource type="AudioEffectEQ21" format=3 uid="uid://dcm8m635vyksd"]
+
+[resource]
+band_db/22_hz = 10.9
+band_db/32_hz = 5.5
+band_db/44_hz = 2.5
+band_db/63_hz = 1.0
+band_db/250_hz = -4.0
+band_db/350_hz = -3.5
+band_db/500_hz = -8.9
+band_db/700_hz = -19.4
+band_db/1000_hz = -27.3
+band_db/1400_hz = -29.3
+band_db/2000_hz = -29.4
+band_db/2800_hz = -35.8
+band_db/4000_hz = -26.3
+band_db/5600_hz = -32.3
+band_db/8000_hz = -32.3
+band_db/11000_hz = -29.8
+band_db/16000_hz = -46.7
+band_db/22000_hz = -60.0
