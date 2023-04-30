@@ -7,6 +7,7 @@ var next_scene: PackedScene = null
 
 func _ready():
 	do_load_scene(initial_scene)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func do_load_scene(scene: PackedScene):
 	var new_scene = scene.instantiate()
