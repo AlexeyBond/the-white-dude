@@ -2,7 +2,7 @@ extends Area2D
 
 @export var target_path: NodePath
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var turned: bool = false
 
@@ -13,12 +13,12 @@ func interact():
 		return
 	
 	if turned:
-		animation_player.play_backwards("turn_on")
+		sprite.play("turn-on")
 	else:
-		animation_player.play("turn_on")
+		sprite.play_backwards("turn-on")
 	
 	turned = not turned
-	
+
 	target.start_moving()
 
 

@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://bte4ixcuij5qm"]
+
+[ext_resource type="SpriteFrames" uid="uid://ddikogron8i5g" path="res://frog_frames.tres" id="1_7kdag"]
+[ext_resource type="Script" path="res://frog.gd" id="1_kmq4k"]
+[ext_resource type="PackedScene" uid="uid://4yn6fhk03f6y" path="res://help_label.tscn" id="2_3m8n4"]
+[ext_resource type="PackedScene" uid="uid://3jpharme2iis" path="res://speech_bubble.tscn" id="4_egqus"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vpfl"]
+size = Vector2(126, 86)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cdxf8"]
+size = Vector2(28, 78)
+
+[node name="frog" type="Area2D"]
+collision_layer = 65536
+collision_mask = 65536
+script = ExtResource("1_kmq4k")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_7kdag")
+autoplay = "default"
+frame_progress = 0.896315
+
+[node name="help_label" parent="." instance=ExtResource("2_3m8n4")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-7, -3)
+shape = SubResource("RectangleShape2D_5vpfl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(35, 1)
+shape = SubResource("RectangleShape2D_cdxf8")
+
+[node name="speech_bubble" parent="." instance=ExtResource("4_egqus")]
+position = Vector2(0, -142)

@@ -1,47 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c28x552tuvqum"]
+[gd_scene load_steps=6 format=3 uid="uid://c28x552tuvqum"]
 
 [ext_resource type="Script" path="res://lever.gd" id="1_uqro5"]
 [ext_resource type="PackedScene" uid="uid://4yn6fhk03f6y" path="res://help_label.tscn" id="2_jfw8c"]
+[ext_resource type="SpriteFrames" uid="uid://d0th3xliqghg1" path="res://lever_frames.tres" id="3_3knu3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_adniu"]
 size = Vector2(16, 64)
-
-[sub_resource type="Animation" id="Animation_iohk7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect2:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.261799]
-}
-
-[sub_resource type="Animation" id="Animation_mj1sc"]
-resource_name = "turn_on"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect2:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0412402, 0.443526, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [-0.261799, -0.0872665, 0.0872665, 0.261799]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fvlo8"]
-_data = {
-"RESET": SubResource("Animation_iohk7"),
-"turn_on": SubResource("Animation_mj1sc")
-}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aqtqj"]
 size = Vector2(36, 32)
@@ -54,25 +18,6 @@ script = ExtResource("1_uqro5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_adniu")
 
-[node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = -2.0
-offset_top = -76.0
-offset_right = 2.0
-offset_bottom = 5.00001
-rotation = -0.261799
-pivot_offset = Vector2(2, 80)
-color = Color(1, 0, 0, 1)
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_fvlo8")
-}
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 3
 collision_mask = 3
@@ -82,3 +27,10 @@ position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_aqtqj")
 
 [node name="help_label" parent="." instance=ExtResource("2_jfw8c")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = ExtResource("3_3knu3")
+animation = &"turn-on"
+frame = 6
+frame_progress = 1.0
