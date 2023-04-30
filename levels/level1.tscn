@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dw86omwutt337"]
+[gd_scene load_steps=9 format=3 uid="uid://dw86omwutt337"]
 
 [ext_resource type="PackedScene" uid="uid://bi0el8nqhgbu3" path="res://player.tscn" id="1_tniwb"]
 [ext_resource type="TileSet" uid="uid://r3bb4fwxktme" path="res://tilesets/glass_tiles.tres" id="2_3hco2"]
+[ext_resource type="PackedScene" uid="uid://4yn6fhk03f6y" path="res://help_label.tscn" id="2_g4m4a"]
 [ext_resource type="TileSet" uid="uid://bpxh0s571vpti" path="res://tilesets/mirror_tiles.tres" id="3_f8p0o"]
 [ext_resource type="TileSet" uid="uid://gxo1xffq5yhe" path="res://tilesets/wall_tiles.tres" id="4_tbm33"]
 [ext_resource type="TileSet" uid="uid://rsnmewmbueul" path="res://tilesets/shadow_tiles.tres" id="5_al7au"]
@@ -12,6 +13,11 @@
 
 [node name="Player" parent="." instance=ExtResource("1_tniwb")]
 position = Vector2(288, 268)
+disable_actions = true
+
+[node name="help_label" parent="Player" instance=ExtResource("2_g4m4a")]
+text = "Press [A/D]"
+is_hidden = false
 
 [node name="GlassMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_3hco2")
@@ -35,3 +41,5 @@ layer_0/tile_data = PackedInt32Array(262147, 131073, 2, 262166, 196609, 2, 11141
 [node name="portal" parent="." instance=ExtResource("6_54hes")]
 position = Vector2(289, 445)
 next_level = ExtResource("7_uster")
+
+[connection signal="moved" from="Player" to="Player/help_label" method="disable"]

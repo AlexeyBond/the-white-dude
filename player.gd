@@ -6,6 +6,8 @@ const SPEED = 300.0
 const FALL_SPEED = 300.0
 const FALL_TIME_TO_ANIMATE = 0.1
 
+@export var disable_actions = false
+
 @onready var sprite = $AnimatedSprite2D
 
 @onready var interact_left: Area2D = $interact_left
@@ -15,6 +17,8 @@ func _ready():
 	sprite.play("idle-1")
 
 var fall_time: float = 0.0
+
+signal moved;
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -30,6 +34,9 @@ func _physics_process(delta):
 		velocity.x = direction * SPEED
 		velocity.y = 0
 		
+		if abs(velocity.x) > 0.1:
+			emit_signal("moved")
+
 		if direction:
 			sprite.animation = &"walk"
 		elif sprite.animation == &"walk" or sprite.animation == &"fall":
@@ -80,6 +87,9 @@ func do_interact(area: Area2D, animation: StringName):
 		other_area.interact()
 
 func handle_action_pressed():
+	if disable_actions:
+		return
+
 	if not is_on_floor():
 		return
 

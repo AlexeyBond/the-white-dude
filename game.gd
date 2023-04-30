@@ -10,7 +10,7 @@ func do_load_next_scene():
 	
 	remove_child(current_scene)
 	current_scene.call_deferred("free")
-	
+
 	var new_scene = next_scene.instantiate()
 	add_child(new_scene)
 	move_child(new_scene, 0)

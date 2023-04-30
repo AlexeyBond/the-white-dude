@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://qbkc1p117uqu"]
+[gd_scene load_steps=9 format=3 uid="uid://qbkc1p117uqu"]
 
 [ext_resource type="PackedScene" uid="uid://bi0el8nqhgbu3" path="res://player.tscn" id="1_hafom"]
 [ext_resource type="TileSet" uid="uid://r3bb4fwxktme" path="res://tilesets/glass_tiles.tres" id="2_j5qcw"]
+[ext_resource type="PackedScene" uid="uid://4yn6fhk03f6y" path="res://help_label.tscn" id="2_lpd5s"]
 [ext_resource type="TileSet" uid="uid://bpxh0s571vpti" path="res://tilesets/mirror_tiles.tres" id="3_mr13q"]
 [ext_resource type="TileSet" uid="uid://gxo1xffq5yhe" path="res://tilesets/wall_tiles.tres" id="4_ovdby"]
 [ext_resource type="TileSet" uid="uid://rsnmewmbueul" path="res://tilesets/shadow_tiles.tres" id="5_ksajt"]
@@ -12,6 +13,10 @@
 
 [node name="Player" parent="." instance=ExtResource("1_hafom")]
 position = Vector2(288, 449)
+
+[node name="help_label" parent="Player" instance=ExtResource("2_lpd5s")]
+text = "[WASD]+[SPACE]"
+is_hidden = false
 
 [node name="GlassMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_j5qcw")
