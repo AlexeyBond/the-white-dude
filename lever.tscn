@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c28x552tuvqum"]
+[gd_scene load_steps=8 format=3 uid="uid://c28x552tuvqum"]
 
 [ext_resource type="Script" path="res://lever.gd" id="1_uqro5"]
+[ext_resource type="PackedScene" uid="uid://4yn6fhk03f6y" path="res://help_label.tscn" id="2_jfw8c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_adniu"]
 size = Vector2(16, 64)
@@ -79,3 +80,5 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_aqtqj")
+
+[node name="help_label" parent="." instance=ExtResource("2_jfw8c")]

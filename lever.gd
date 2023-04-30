@@ -20,3 +20,10 @@ func interact():
 	turned = not turned
 	
 	target.start_moving()
+
+
+func _process(_delta):
+	if (not get_node(target_path).is_moving) and has_overlapping_areas():
+		$help_label.enable()
+	else:
+		$help_label.disable()
