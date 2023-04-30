@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://rgtlksee2aib"]
+
+[ext_resource type="SpriteFrames" uid="uid://typ1kstfy8c8" path="res://player-sprite-frames.tres" id="1_pibhf"]
+
+[sub_resource type="GDScript" id="GDScript_shc8m"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$AnimatedSprite2D.play(\"idle-1\")
+
+"
+
+[node name="_completed" type="Node2D"]
+script = SubResource("GDScript_shc8m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1496, 693)
+sprite_frames = ExtResource("1_pibhf")
+animation = &"idle-1"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 552.0
+offset_top = 385.0
+offset_right = 939.0
+offset_bottom = 525.0
+theme_override_font_sizes/font_size = 100
+text = "The end"
