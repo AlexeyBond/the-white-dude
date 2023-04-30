@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dwonksre1fwmn"]
+[gd_scene load_steps=14 format=3 uid="uid://dwonksre1fwmn"]
 
 [ext_resource type="PackedScene" uid="uid://bi0el8nqhgbu3" path="res://player.tscn" id="1_8t081"]
 [ext_resource type="TileSet" uid="uid://gxo1xffq5yhe" path="res://tilesets/wall_tiles.tres" id="2_0ipt7"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://c28x552tuvqum" path="res://lever.tscn" id="8_2h04x"]
 [ext_resource type="AudioStream" uid="uid://c2dgbu62nstpw" path="res://sound/music-0.mp3" id="8_tvvw6"]
 [ext_resource type="PackedScene" uid="uid://bte4ixcuij5qm" path="res://frog.tscn" id="9_seae5"]
+[ext_resource type="PackedScene" uid="uid://fpmpy5157v31" path="res://portal.tscn" id="10_3xl8c"]
+[ext_resource type="PackedScene" uid="uid://rgtlksee2aib" path="res://levels/_completed.tscn" id="11_uhhml"]
 
 [sub_resource type="GDScript" id="GDScript_ntd7w"]
 script/source = "extends AudioStreamPlayer
@@ -92,3 +94,7 @@ in_hard_body_filter = SubResource("AudioEffectEQ21_n5efr")
 
 [node name="frog" parent="." instance=ExtResource("9_seae5")]
 position = Vector2(413, 466)
+
+[node name="portal" parent="." instance=ExtResource("10_3xl8c")]
+position = Vector2(1335, 706)
+next_level = ExtResource("11_uhhml")

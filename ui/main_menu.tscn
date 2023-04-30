@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://gxvu8t8mab35"]
+
+[ext_resource type="Theme" uid="uid://boujxlwyqn2oj" path="res://addons/MinimalUI/MinimalUI.tres" id="1_5bsm1"]
+[ext_resource type="PackedScene" uid="uid://dw86omwutt337" path="res://levels/level1.tscn" id="2_1bteq"]
+
+[sub_resource type="GDScript" id="GDScript_fe1k1"]
+script/source = "extends Control
+
+
+@export var first_level: PackedScene
+
+@onready var scene_manager: Game = get_parent().get_parent()
+
+
+func _on_new_game_btn_pressed():
+	GameMode.set_plus_game_mode(false)
+	scene_manager.change_level(first_level)
+
+
+func _on_exit_btn_pressed():
+	get_tree().quit()
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func _exit_tree():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+
+func _on_new_game_plus_btn_pressed():
+	GameMode.set_plus_game_mode(true)
+	scene_manager.change_level(first_level)
+"
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_5bsm1")
+script = SubResource("GDScript_fe1k1")
+first_level = ExtResource("2_1bteq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -33.0
+offset_right = 45.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="new_game_plus_btn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "New game+"
+
+[node name="new_game_btn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "New game"
+
+[node name="exit_btn" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer/new_game_plus_btn" to="." method="_on_new_game_plus_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/new_game_btn" to="." method="_on_new_game_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/exit_btn" to="." method="_on_exit_btn_pressed"]

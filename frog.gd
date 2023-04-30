@@ -17,7 +17,7 @@ func interact():
 	var time = Time.get_date_dict_from_system()
 
 	if time.weekday == 3:
-		speech_buble.say("Сегодня среда, чувак")
+		speech_buble.say("It's wednesday, my dude")
 	else:
-		speech_buble.say("Сегодня не среда, чувак")
+		speech_buble.say("It's not wednesday, dude")
 

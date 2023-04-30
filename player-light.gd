@@ -8,11 +8,12 @@ class_name PlayerLight
 
 @onready var optical_body = $optical_body
 @onready var in_hard_trigger = $in_hard_trigger
-@onready var sfx_manager: MyAudioEffectsManager = get_node("/root/AudioFXManager")
 
 const SECONDS_PER_TAIL_PARTICLE = 0.01
 
 const GLASS_SPEED_FACTOR = 0.1
+
+const WARNING_TIME = 10.0
 
 func _ready():
 	move_velocity_factor = 0.0
@@ -50,9 +51,9 @@ func _physics_process(delta):
 
 	if in_hard_trigger.has_overlapping_bodies():
 		movement *= GLASS_SPEED_FACTOR
-		sfx_manager.enable_in_hard_body_sound()
+		AudioEffectsManager.enable_in_hard_body_sound()
 	else:
-		sfx_manager.disable_in_hard_body_sound()
+		AudioEffectsManager.disable_in_hard_body_sound()
 
 	if move_and_collide(movement) != null:
 		start_restoring_material_body()
@@ -68,3 +69,18 @@ func _physics_process(delta):
 			last_optical_collider = optical_collision.get_collider()
 	else:
 		last_optical_collider = null
+
+var lifetime = 0.0
+
+func _process(delta):
+	lifetime += delta
+	
+	if lifetime > WARNING_TIME:
+		$loop_help_label.enable()
+
+
+
+
+
+
+

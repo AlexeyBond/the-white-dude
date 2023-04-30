@@ -1,28 +1,29 @@
 extends CanvasLayer
 
+class_name Game
+
 @export var initial_scene: PackedScene
 
 var current_scene: PackedScene = null
 var next_scene: PackedScene = null
 
+@onready var wrapper: Node = $current_scene_wrapper
+
 func _ready():
 	do_load_scene(initial_scene)
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func do_load_scene(scene: PackedScene):
+	for child in wrapper.get_children():
+		wrapper.remove_child(child)
+		child.call_deferred("free")
+
 	var new_scene = scene.instantiate()
-	add_child(new_scene)
-	move_child(new_scene, 0)
+	wrapper.add_child(new_scene)
 	current_scene = scene
 
 func do_load_next_scene():
 	if next_scene == null:
 		return
-
-	var current = get_child(0)
-
-	remove_child(current)
-	current.call_deferred("free")
 
 	do_load_scene(next_scene)
 	next_scene = null

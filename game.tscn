@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dijxa8a80fnya"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_k16ff"]
-[ext_resource type="PackedScene" uid="uid://dw86omwutt337" path="res://levels/level1.tscn" id="2_pb10j"]
+[ext_resource type="PackedScene" uid="uid://gxvu8t8mab35" path="res://ui/main_menu.tscn" id="2_fp21x"]
 [ext_resource type="AudioStream" uid="uid://c2dgbu62nstpw" path="res://sound/music-0.mp3" id="3_yimot"]
 
 [sub_resource type="Animation" id="Animation_d8d85"]
@@ -90,7 +90,9 @@ func _ready():
 
 [node name="game" type="CanvasLayer"]
 script = ExtResource("1_k16ff")
-initial_scene = ExtResource("2_pb10j")
+initial_scene = ExtResource("2_fp21x")
+
+[node name="current_scene_wrapper" type="Node" parent="."]
 
 [node name="fader" type="ColorRect" parent="."]
 visible = false

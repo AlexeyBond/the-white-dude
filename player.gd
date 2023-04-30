@@ -67,9 +67,10 @@ func _on_sprite_animation_finished():
 var light_scene = preload("res://player-light.tscn")
 
 func do_transform(direction: Vector2):
-	var a = direction.angle()
-	a -= fmod(a, PI * 0.5)
-	direction = Vector2(1,0).rotated(a)
+	if not GameMode.plus_game_mode_enabled():
+		var a = direction.angle()
+		a -= fmod(a, PI * 0.5)
+		direction = Vector2(1,0).rotated(a)
 
 	var as_light = light_scene.instantiate()
 
@@ -90,7 +91,7 @@ func handle_action_pressed():
 	if disable_actions:
 		return
 
-	if not is_on_floor():
+	if (not is_on_floor()) and (not GameMode.plus_game_mode_enabled()):
 		return
 
 	var direction = Vector2(

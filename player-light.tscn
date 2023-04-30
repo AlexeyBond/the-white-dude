@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cowlk6ot1uemo"]
+[gd_scene load_steps=16 format=3 uid="uid://cowlk6ot1uemo"]
 
 [ext_resource type="Script" path="res://player-light.gd" id="1_oq6ga"]
 [ext_resource type="Shader" uid="uid://d3alq2kn0enmd" path="res://player-light-render.tres" id="1_vxcwo"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4lpu3n7vtphn" path="res://dot.png" id="3_hgom2"]
 [ext_resource type="Texture2D" uid="uid://c2ao0j46x5xiu" path="res://art/player-0000.png" id="5_okyms"]
 [ext_resource type="Material" uid="uid://db2eg40k0psws" path="res://player-tail-particles.material" id="6_qawkf"]
+[ext_resource type="PackedScene" uid="uid://4yn6fhk03f6y" path="res://help_label.tscn" id="7_whetc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d8ln4"]
 shader = ExtResource("1_vxcwo")
@@ -223,3 +224,7 @@ color = Color(1, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="in_hard_trigger"]
 shape = SubResource("CircleShape2D_dkj1o")
+
+[node name="loop_help_label" parent="." instance=ExtResource("7_whetc")]
+text = "[R] to restart"
+hide_in_plus_mode = false

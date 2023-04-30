@@ -5,7 +5,7 @@ extends Node2D
 
 
 func on_player_teleported():
-	owner.get_parent().change_level(next_level)
+	owner.get_parent().get_parent().change_level(next_level)
 
 
 func _on_area_2d_body_entered(body):

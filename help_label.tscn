@@ -7,13 +7,20 @@ script/source = "extends Node2D
 
 @export var is_hidden: bool = true
 
+@export var hide_in_plus_mode: bool = true
+
 @onready var ap: AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	$Panel/Label.text = text
+	is_hidden = is_hidden or \\
+		(hide_in_plus_mode and GameMode.plus_game_mode_enabled())
 	$Panel.modulate.a = 0 if is_hidden else 1
 
 func enable():
+	if hide_in_plus_mode and GameMode.plus_game_mode_enabled():
+		return
+
 	if is_hidden and ap.current_animation != \"show\":
 		ap.play(&\"show\")
 

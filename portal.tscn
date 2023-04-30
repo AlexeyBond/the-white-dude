@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://fpmpy5157v31"]
+[gd_scene load_steps=10 format=3 uid="uid://fpmpy5157v31"]
 
 [ext_resource type="Script" path="res://portal.gd" id="1_0s7oh"]
 [ext_resource type="Texture2D" uid="uid://0sgdv2jud2hx" path="res://art/portal.png" id="1_jv30v"]
@@ -34,6 +34,8 @@ turbulence_initial_displacement_max = 6.1
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8y6vy"]
 size = Vector2(98, 126)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4l4h0"]
+
 [node name="portal" type="Node2D"]
 script = ExtResource("1_0s7oh")
 
@@ -53,5 +55,12 @@ texture = ExtResource("2_7t13j")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-5, 0)
 shape = SubResource("RectangleShape2D_8y6vy")
+
+[node name="materializer" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="materializer"]
+shape = SubResource("CircleShape2D_4l4h0")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
