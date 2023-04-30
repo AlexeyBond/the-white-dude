@@ -90,8 +90,7 @@ func _ready():
 
 [node name="game" type="CanvasLayer"]
 script = ExtResource("1_k16ff")
-
-[node name="currentScene" parent="." instance=ExtResource("2_pb10j")]
+initial_scene = ExtResource("2_pb10j")
 
 [node name="fader" type="ColorRect" parent="."]
 visible = false

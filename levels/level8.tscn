@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyuibnp1722rj"]
+[gd_scene load_steps=10 format=3 uid="uid://dyuibnp1722rj"]
 
 [ext_resource type="PackedScene" uid="uid://bi0el8nqhgbu3" path="res://player.tscn" id="1_snmyy"]
 [ext_resource type="TileSet" uid="uid://r3bb4fwxktme" path="res://tilesets/glass_tiles.tres" id="2_kq8ui"]
@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://gxo1xffq5yhe" path="res://tilesets/wall_tiles.tres" id="4_msrhs"]
 [ext_resource type="TileSet" uid="uid://rsnmewmbueul" path="res://tilesets/shadow_tiles.tres" id="5_616mx"]
 [ext_resource type="PackedScene" uid="uid://fpmpy5157v31" path="res://portal.tscn" id="6_7jiju"]
+[ext_resource type="PackedScene" uid="uid://dfwprawseib7y" path="res://levels/level9.tscn" id="7_4cphf"]
 [ext_resource type="PackedScene" uid="uid://c28x552tuvqum" path="res://lever.tscn" id="7_tuc38"]
 [ext_resource type="Script" path="res://moving.gd" id="8_qe36v"]
 
@@ -36,6 +37,7 @@ layer_0/tile_data = PackedInt32Array(46, 196609, 2, 20, 196609, 0, 21, 196609, 0
 
 [node name="portal" parent="." instance=ExtResource("6_7jiju")]
 position = Vector2(1198, 442)
+next_level = ExtResource("7_4cphf")
 
 [node name="lever" parent="." instance=ExtResource("7_tuc38")]
 position = Vector2(610, 501)
