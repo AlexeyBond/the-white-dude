@@ -49,6 +49,9 @@ func _on_submit_score_btn_pressed():
 	player_name_input.editable = false
 	submit_score_button.disabled = true
 
+	if score == 0:
+		return
+
 	$HTTPRequest.request(
 		\"http://dreamlo.com/lb/esFrrLlezEyBOsyu_Gl7GAi78wDz_YGU2y0UB2mKWjOg/add-json-asc/{0}/{1}\" \\
 			.format([
@@ -56,6 +59,9 @@ func _on_submit_score_btn_pressed():
 				score,
 			])
 	)
+
+func _on_player_name_text_submitted(new_text):
+	_on_submit_score_btn_pressed()
 
 
 func show_leaderboard(leaderboard_data):
@@ -96,8 +102,8 @@ func show_leaderboard(leaderboard_data):
 	
 
 
-func _on_player_name_text_changed():
-	if (player_name_input.editable) and (len(player_name_input.text) > 0):
+func _on_player_name_text_changed(text):
+	if (player_name_input.editable) and (len(text) > 0):
 		submit_score_button.disabled = false
 	else:
 		submit_score_button.disabled = true
@@ -148,7 +154,6 @@ func _on_http_request_request_completed(_result, response_code, _headers, body):
 		data = [data]
 
 	show_leaderboard(data)
-
 "
 
 [node name="_completed" type="Node2D"]
@@ -214,8 +219,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Your score is 200 seconds"
 
-[node name="player_name" type="TextEdit" parent="PlayerScorePanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+[node name="player_name" type="LineEdit" parent="PlayerScorePanel/VBoxContainer"]
 layout_mode = 2
 placeholder_text = "Enter your name"
 
@@ -257,5 +261,6 @@ score = "Score"
 [connection signal="pressed" from="new_game_plus_button" to="." method="_on_new_game_plus_button_pressed"]
 [connection signal="pressed" from="menu_button" to="." method="_on_menu_button_pressed"]
 [connection signal="text_changed" from="PlayerScorePanel/VBoxContainer/player_name" to="." method="_on_player_name_text_changed"]
+[connection signal="text_submitted" from="PlayerScorePanel/VBoxContainer/player_name" to="." method="_on_player_name_text_submitted"]
 [connection signal="pressed" from="PlayerScorePanel/VBoxContainer/submit_score_btn" to="." method="_on_submit_score_btn_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
