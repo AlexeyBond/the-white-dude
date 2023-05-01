@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6eipxa1bwqqp"]
+[gd_scene load_steps=9 format=3 uid="uid://c6eipxa1bwqqp"]
 
 [ext_resource type="Script" path="res://SceneManager.gd" id="1_dlhgc"]
 [ext_resource type="PackedScene" uid="uid://gxvu8t8mab35" path="res://ui/main_menu.tscn" id="2_xeh05"]
 [ext_resource type="AudioStream" uid="uid://c2dgbu62nstpw" path="res://sound/music-0.mp3" id="3_b5yie"]
+[ext_resource type="AudioStream" uid="uid://frtvt0sc2mqq" path="res://sound/music-1.mp3" id="4_il3cx"]
 
 [sub_resource type="Animation" id="Animation_d8d85"]
 length = 0.001
@@ -108,4 +109,9 @@ libraries = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_b5yie")
 volume_db = -10.342
+script = SubResource("GDScript_pr4j6")
+
+[node name="LightAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_il3cx")
+volume_db = -10.572
 script = SubResource("GDScript_pr4j6")
