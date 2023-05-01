@@ -6,14 +6,12 @@
 [sub_resource type="GDScript" id="GDScript_shc8m"]
 script/source = "extends Node2D
 
-@onready var scene_manager: Game = get_parent().get_parent()
-
 func _ready():
 	$AnimatedSprite2D.play(\"idle-1\")
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_menu_button_pressed():
-	scene_manager.change_level(load(\"res://ui/main_menu.tscn\"))
+	SceneManager.change_scene(load(\"res://ui/main_menu.tscn\"))
 
 "
 

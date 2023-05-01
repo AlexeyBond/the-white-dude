@@ -9,12 +9,10 @@ script/source = "extends Control
 
 @export var first_level: PackedScene
 
-@onready var scene_manager: Game = get_parent().get_parent()
-
 
 func _on_new_game_btn_pressed():
 	GameMode.set_plus_game_mode(false)
-	scene_manager.change_level(first_level)
+	SceneManager.change_scene(first_level)
 
 
 func _on_exit_btn_pressed():
@@ -29,7 +27,7 @@ func _exit_tree():
 
 func _on_new_game_plus_btn_pressed():
 	GameMode.set_plus_game_mode(true)
-	scene_manager.change_level(first_level)
+	SceneManager.change_scene(first_level)
 "
 
 [node name="main_menu" type="Control"]

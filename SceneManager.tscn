@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dijxa8a80fnya"]
+[gd_scene load_steps=8 format=3 uid="uid://c6eipxa1bwqqp"]
 
-[ext_resource type="Script" path="res://game.gd" id="1_k16ff"]
-[ext_resource type="PackedScene" uid="uid://gxvu8t8mab35" path="res://ui/main_menu.tscn" id="2_fp21x"]
-[ext_resource type="AudioStream" uid="uid://c2dgbu62nstpw" path="res://sound/music-0.mp3" id="3_yimot"]
+[ext_resource type="Script" path="res://SceneManager.gd" id="1_dlhgc"]
+[ext_resource type="PackedScene" uid="uid://gxvu8t8mab35" path="res://ui/main_menu.tscn" id="2_xeh05"]
+[ext_resource type="AudioStream" uid="uid://c2dgbu62nstpw" path="res://sound/music-0.mp3" id="3_b5yie"]
 
 [sub_resource type="Animation" id="Animation_d8d85"]
 length = 0.001
@@ -89,10 +89,8 @@ func _ready():
 "
 
 [node name="game" type="CanvasLayer"]
-script = ExtResource("1_k16ff")
-initial_scene = ExtResource("2_fp21x")
-
-[node name="current_scene_wrapper" type="Node" parent="."]
+script = ExtResource("1_dlhgc")
+initial_scene = ExtResource("2_xeh05")
 
 [node name="fader" type="ColorRect" parent="."]
 visible = false
@@ -108,6 +106,6 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_yimot")
+stream = ExtResource("3_b5yie")
 volume_db = -10.342
 script = SubResource("GDScript_pr4j6")
