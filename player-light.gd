@@ -8,6 +8,8 @@ class_name PlayerLight
 
 @onready var optical_body = $optical_body
 @onready var in_hard_trigger = $in_hard_trigger
+@onready var transform2dude_audio = $TransformToDudeAudio
+@onready var transform2light_audio = $Transform2LightAudio
 
 const SECONDS_PER_TAIL_PARTICLE = 0.01
 
@@ -18,6 +20,7 @@ const WARNING_TIME = 25.0
 func _ready():
 	move_velocity_factor = 0.0
 	$AnimationPlayer.play("to_light")
+	transform2light_audio.play()
 	velocity = Vector2.ZERO
 	
 	optical_body.top_level = true
@@ -26,6 +29,7 @@ func _ready():
 func start_restoring_material_body():
 	move_speed = 0.0
 	$AnimationPlayer.play("to_body")
+	transform2dude_audio.play()
 	$tail_emitter.emitting = false
 
 func spawn_body():
