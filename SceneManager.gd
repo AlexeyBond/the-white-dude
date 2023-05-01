@@ -29,7 +29,7 @@ func change_scene(lvl):
 	$AnimationPlayer.play("change_scene")
 
 
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("game_restart"):
 		change_scene(initial_scene)
 	elif event.is_action_pressed("game_restart_level"):

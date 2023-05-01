@@ -26,12 +26,16 @@ func _ready():
 	$PlayerScorePanel.visible = GameMode.plus_game_mode_enabled()
 	$LeaderboardPanel.visible = false
 
+	if GameMode.plus_game_mode_enabled():
+		player_name_input.grab_focus()
+
 func _on_menu_button_pressed():
 	SceneManager.change_scene(load(\"res://ui/main_menu.tscn\"))
 
 
 func _on_new_game_plus_button_pressed():
 	GameMode.set_plus_game_mode(true)
+	GameMode.clear_play_time()
 	SceneManager.change_scene(load(\"res://levels/level1.tscn\"))
 
 
