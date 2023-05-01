@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxqpgbnlv80ya"]
+
+[sub_resource type="GDScript" id="GDScript_oqliu"]
+script/source = "extends HBoxContainer
+
+@export var index: String = \"\"
+@export var username: String = \"\"
+@export var score: String = \"\"
+
+func _ready():
+	$index_label.text = index
+	$name_label.text = username
+	$score_label.text = score
+"
+
+[node name="leaderboard_entry" type="HBoxContainer"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_oqliu")
+
+[node name="index_label" type="Label" parent="."]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "666"
+
+[node name="name_label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FooBar Buzovich"
+
+[node name="score_label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "42.13 seconds"

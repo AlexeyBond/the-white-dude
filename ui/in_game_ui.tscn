@@ -14,7 +14,14 @@ func _ready():
 func _process(_delta):
 	if GameMode.plus_game_mode_enabled():
 		timer_label.visible = true
-		timer_label.text = \"%.2fs\" % GameMode.get_total_play_time()
+		var current_score = GameMode.get_total_play_time()
+		var best_score = GameMode.get_best_score()
+		timer_label.text = \"%.2fs\" % current_score
+		
+		if best_score > 0 and best_score < current_score:
+			timer_label.modulate = Color(1,0,0,1)
+		else:
+			timer_label.modulate = Color(1,1,1,1)
 	else:
 		timer_label.visible = false
 "

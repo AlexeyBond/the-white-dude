@@ -1,17 +1,149 @@
-[gd_scene load_steps=4 format=3 uid="uid://rgtlksee2aib"]
+[gd_scene load_steps=5 format=3 uid="uid://rgtlksee2aib"]
 
 [ext_resource type="SpriteFrames" uid="uid://typ1kstfy8c8" path="res://player-sprite-frames.tres" id="1_pibhf"]
 [ext_resource type="Theme" uid="uid://boujxlwyqn2oj" path="res://addons/MinimalUI/MinimalUI.tres" id="2_sjpdp"]
+[ext_resource type="PackedScene" uid="uid://bxqpgbnlv80ya" path="res://ui/leaderboard_entry.tscn" id="3_pu14q"]
 
 [sub_resource type="GDScript" id="GDScript_shc8m"]
 script/source = "extends Node2D
 
+const MAX_LEADERBOARD_ENTRIES = 5
+
 func _ready():
 	$AnimatedSprite2D.play(\"idle-1\")
+	if GameMode.plus_game_mode_enabled():
+		GameMode.save_score()
+	else:
+		GameMode.allow_plus_game_mode()
+
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+	$new_game_plus_button.visible = not GameMode.plus_game_mode_enabled()
+	
+	$PlayerScorePanel/VBoxContainer/player_score_label.text = \\
+		\"Your score is %.2f seconds\" % GameMode.get_total_play_time()
+
+	$PlayerScorePanel.visible = GameMode.plus_game_mode_enabled()
+	$LeaderboardPanel.visible = false
 
 func _on_menu_button_pressed():
 	SceneManager.change_scene(load(\"res://ui/main_menu.tscn\"))
+
+
+func _on_new_game_plus_button_pressed():
+	GameMode.set_plus_game_mode(true)
+	SceneManager.change_scene(load(\"res://levels/level1.tscn\"))
+
+
+@onready var player_name_input = $PlayerScorePanel/VBoxContainer/player_name
+@onready var submit_score_button = $PlayerScorePanel/VBoxContainer/submit_score_btn
+
+
+func _on_submit_score_btn_pressed():
+	var score = int(GameMode.get_total_play_time() * 100)
+	
+	player_name_input.editable = false
+	submit_score_button.disabled = true
+
+	$HTTPRequest.request(
+		\"http://dreamlo.com/lb/esFrrLlezEyBOsyu_Gl7GAi78wDz_YGU2y0UB2mKWjOg/add-json-asc/{0}/{1}\" \\
+			.format([
+				player_name_input.text.uri_encode(),
+				score,
+			])
+	)
+
+
+func show_leaderboard(leaderboard_data):
+	var leaderboard_root = $LeaderboardPanel/VBoxContainer
+	var entry_scene: PackedScene = load(\"res://ui/leaderboard_entry.tscn\")
+	var this_player_name: String = player_name_input.text
+	var rows_shown: int = 0
+	var index: int = 0
+	var this_player_shown: bool = false
+
+	for row in leaderboard_data:
+		index += 1
+		var is_this_player = row.name == this_player_name
+
+		if rows_shown >= MAX_LEADERBOARD_ENTRIES:
+			break
+		
+		if rows_shown >= (MAX_LEADERBOARD_ENTRIES - 1) and \\
+			(not this_player_shown) and \\
+			(not is_this_player):
+				continue
+		
+		var ui_row = entry_scene.instantiate()
+		
+		ui_row.index = str(index)
+		ui_row.username = row.name
+		ui_row.score = \"%.2f seconds\" % (float(row.score)/100.0)
+		
+		if is_this_player:
+			ui_row.modulate = Color(1.0, 0.5, 0.5, 1.0)
+
+		leaderboard_root.add_child(ui_row)
+
+		rows_shown += 1
+
+	$LeaderboardPanel.visible = true
+	
+	
+
+
+func _on_player_name_text_changed():
+	if (player_name_input.editable) and (len(player_name_input.text) > 0):
+		submit_score_button.disabled = false
+	else:
+		submit_score_button.disabled = true
+
+
+func _on_http_request_request_completed(_result, response_code, _headers, body):
+	if response_code != 200:
+		submit_score_button.disabled = false
+		player_name_input.editable = true
+		print(\"Got response code=\", response_code)
+		return
+	
+	var json = JSON.new()
+
+	if json.parse(body.get_string_from_utf8()) != OK:
+		submit_score_button.disabled = false
+		player_name_input.editable = true
+		print(\"Error parsing JSON from dreamlo: \", body.get_string_from_utf8())
+		return
+	# {
+	#	\"dreamlo\": {
+	#		\"leaderboard\": {
+	#		    \"entry\": [ # may be an object
+	#			    {
+	#			        \"name\": \"a2\",
+	#			        \"score\": \"1000000\",
+	#			        \"seconds\": \"0\",
+	#			        \"text\": \"\",
+	#			        \"date\": \"5/1/2023 1:00:57 PM\"
+	#			    },
+	#			    {
+	#			        \"name\": \"a1\",
+	#			        \"score\": \"1000000\",
+	#			        \"seconds\": \"0\",
+	#			        \"text\": \"\",
+	#			        \"date\": \"5/1/2023 1:00:13 PM\"
+	#			    }
+	#		    ]
+	#		}
+	#	}
+	# }
+	
+	var data = json.data.dreamlo.leaderboard.entry
+	
+	if data == null:
+		return
+	elif typeof(data) != TYPE_ARRAY:
+		data = [data]
+
+	show_leaderboard(data)
 
 "
 
@@ -31,7 +163,15 @@ offset_bottom = 525.0
 theme_override_font_sizes/font_size = 100
 text = "The end"
 
-[node name="Button" type="Button" parent="."]
+[node name="new_game_plus_button" type="Button" parent="."]
+offset_left = 870.0
+offset_top = 601.0
+offset_right = 965.0
+offset_bottom = 626.0
+theme = ExtResource("2_sjpdp")
+text = "New game +"
+
+[node name="menu_button" type="Button" parent="."]
 offset_left = 874.0
 offset_top = 632.0
 offset_right = 961.0
@@ -39,4 +179,79 @@ offset_bottom = 657.0
 theme = ExtResource("2_sjpdp")
 text = "Main menu"
 
-[connection signal="pressed" from="Button" to="." method="_on_menu_button_pressed"]
+[node name="PlayerScorePanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1457.0
+offset_top = 32.0
+offset_right = 1883.0
+offset_bottom = 193.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerScorePanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -58.0
+offset_right = -10.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="player_score_label" type="Label" parent="PlayerScorePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Your score is 200 seconds"
+
+[node name="player_name" type="TextEdit" parent="PlayerScorePanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "Enter your name"
+
+[node name="submit_score_btn" type="Button" parent="PlayerScorePanel/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Submit score"
+
+[node name="LeaderboardPanel" type="Panel" parent="."]
+offset_left = 1458.0
+offset_top = 201.0
+offset_right = 1884.0
+offset_bottom = 473.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LeaderboardPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" type="Label" parent="LeaderboardPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Best scores"
+
+[node name="leaderboard_entry" parent="LeaderboardPanel/VBoxContainer" instance=ExtResource("3_pu14q")]
+modulate = Color(0.411765, 0.411765, 0.411765, 1)
+layout_mode = 2
+index = "#"
+username = "Name"
+score = "Score"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[connection signal="pressed" from="new_game_plus_button" to="." method="_on_new_game_plus_button_pressed"]
+[connection signal="pressed" from="menu_button" to="." method="_on_menu_button_pressed"]
+[connection signal="text_changed" from="PlayerScorePanel/VBoxContainer/player_name" to="." method="_on_player_name_text_changed"]
+[connection signal="pressed" from="PlayerScorePanel/VBoxContainer/submit_score_btn" to="." method="_on_submit_score_btn_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
