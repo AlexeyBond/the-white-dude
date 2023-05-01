@@ -56,3 +56,26 @@ func clear_in_hard_body_sound():
 	set_in_body_filter_intensity(0.0)
 	hard_body_eq_disabling = false
 	hard_body_eq_enabling = false
+
+
+var light_sound_volume: float:
+	set(value):
+		AudioServer.set_bus_volume_db(
+			AudioServer.get_bus_index("LightPlayerSound"),
+			value
+		)
+	get:
+		return AudioServer.get_bus_volume_db(
+			AudioServer.get_bus_index("LightPlayerSound")
+		)
+
+
+
+func reset():
+	disable_in_hard_body_sound()
+
+	light_sound_volume = -80
+
+
+
+

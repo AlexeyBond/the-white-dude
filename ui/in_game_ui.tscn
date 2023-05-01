@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://de7trgmnupdyw"]
+
+[ext_resource type="Theme" uid="uid://boujxlwyqn2oj" path="res://addons/MinimalUI/MinimalUI.tres" id="1_75dqh"]
+
+[sub_resource type="GDScript" id="GDScript_5h75l"]
+script/source = "extends Control
+
+@onready var timer_label = $timer_label
+
+func _ready():
+	visible = false
+
+
+func _process(_delta):
+	if GameMode.plus_game_mode_enabled():
+		timer_label.visible = true
+		timer_label.text = \"%.2fs\" % GameMode.get_total_play_time()
+	else:
+		timer_label.visible = false
+"
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_5h75l")
+
+[node name="timer_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 69.0
+offset_bottom = 46.0
+theme = ExtResource("1_75dqh")
+theme_override_font_sizes/font_size = 50
+text = "10.36s"

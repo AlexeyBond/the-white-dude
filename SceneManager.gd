@@ -12,6 +12,8 @@ func do_load_next_scene():
 
 	callback.call()
 	callback = null
+	
+	AudioEffectsManager.reset()
 
 func change_scene(lvl):
 	if lvl == null:

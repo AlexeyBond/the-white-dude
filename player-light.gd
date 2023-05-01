@@ -78,7 +78,11 @@ func _process(delta):
 	if lifetime > WARNING_TIME:
 		$loop_help_label.enable()
 
-
+@export var light_sound_volume: float:
+	set(value):
+		AudioEffectsManager.light_sound_volume = value
+	get:
+		return AudioEffectsManager.light_sound_volume
 
 
 

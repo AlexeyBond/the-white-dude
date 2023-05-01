@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyuibnp1722rj"]
+[gd_scene load_steps=11 format=3 uid="uid://dyuibnp1722rj"]
 
+[ext_resource type="Script" path="res://Level.gd" id="1_ryayg"]
 [ext_resource type="PackedScene" uid="uid://bi0el8nqhgbu3" path="res://player.tscn" id="1_snmyy"]
 [ext_resource type="TileSet" uid="uid://r3bb4fwxktme" path="res://tilesets/glass_tiles.tres" id="2_kq8ui"]
 [ext_resource type="TileSet" uid="uid://bpxh0s571vpti" path="res://tilesets/mirror_tiles.tres" id="3_0jquh"]
@@ -11,6 +12,7 @@
 [ext_resource type="Script" path="res://moving.gd" id="8_qe36v"]
 
 [node name="level" type="Node2D"]
+script = ExtResource("1_ryayg")
 
 [node name="Player" parent="." instance=ExtResource("1_snmyy")]
 position = Vector2(1192, 218)

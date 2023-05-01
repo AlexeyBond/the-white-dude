@@ -114,4 +114,5 @@ script = SubResource("GDScript_pr4j6")
 [node name="LightAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_il3cx")
 volume_db = -10.572
+bus = &"LightPlayerSound"
 script = SubResource("GDScript_pr4j6")

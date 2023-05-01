@@ -9,6 +9,7 @@ script/source = "extends Control
 
 @export var first_level: PackedScene
 
+@onready var new_game_plus_button = $VBoxContainer/new_game_plus_btn
 
 func _on_new_game_btn_pressed():
 	GameMode.set_plus_game_mode(false)
@@ -19,14 +20,19 @@ func _on_exit_btn_pressed():
 	get_tree().quit()
 
 func _ready():
+	new_game_plus_button.disabled = not GameMode.plus_game_mode_allowed()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _exit_tree():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
+func _unhandled_key_input(event):
+	if event.as_text() == \"X\":
+		new_game_plus_button.disabled = false
 
 func _on_new_game_plus_btn_pressed():
 	GameMode.set_plus_game_mode(true)
+	GameMode.clear_play_time()
 	SceneManager.change_scene(first_level)
 "
 
