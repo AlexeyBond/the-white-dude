@@ -9,7 +9,7 @@ const history_file_path = "user://game_history.tres"
 func load_history():
 	if ResourceLoader.exists(history_file_path):
 		history = load(history_file_path)
-	elif history != null:
+	else:
 		history = GameHistory.new()
 
 
