@@ -11,9 +11,9 @@ class_name PlayerLight
 
 const SECONDS_PER_TAIL_PARTICLE = 0.01
 
-const GLASS_SPEED_FACTOR = 0.1
+const GLASS_SPEED_FACTOR = 0.2
 
-const WARNING_TIME = 10.0
+const WARNING_TIME = 25.0
 
 func _ready():
 	move_velocity_factor = 0.0

@@ -214,6 +214,7 @@ z_index = -1
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_oq6ga")
+move_speed = 400.0
 light_sound_volume = -80.0
 
 [node name="tail_emitter" type="GPUParticles2D" parent="."]

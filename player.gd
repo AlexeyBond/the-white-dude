@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
-const SPEED = 300.0
+const SPEED = 250.0
 const FALL_SPEED = 300.0
 const FALL_TIME_TO_ANIMATE = 0.1
 
