@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bi0el8nqhgbu3"]
+[gd_scene load_steps=11 format=3 uid="uid://bi0el8nqhgbu3"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_4q0gk"]
+[ext_resource type="AudioStream" uid="uid://bfnlmo0svj7gt" path="res://sound/walk_1.wav" id="3_0u0s3"]
 [ext_resource type="SpriteFrames" uid="uid://typ1kstfy8c8" path="res://player-sprite-frames.tres" id="3_6el7x"]
+[ext_resource type="AudioStream" uid="uid://clhe75p8mywfh" path="res://sound/walk_2.wav" id="4_i8r0u"]
+[ext_resource type="AudioStream" uid="uid://bdm0lntp80t7u" path="res://sound/walk_3.wav" id="5_c42wd"]
+[ext_resource type="AudioStream" uid="uid://bcpfunws4xrgh" path="res://sound/walk_4.wav" id="6_4a1r2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0rvn5"]
 size = Vector2(72, 116)
@@ -11,6 +15,17 @@ size = Vector2(32, 67)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4ytb"]
 size = Vector2(34, 64)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5mri8"]
+streams_count = 4
+stream_0/stream = ExtResource("3_0u0s3")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_i8r0u")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("5_c42wd")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("6_4a1r2")
+stream_3/weight = 1.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = -1
@@ -39,6 +54,9 @@ collision_mask = 65536
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interact_right"]
 position = Vector2(32, 17)
 shape = SubResource("RectangleShape2D_g4ytb")
+
+[node name="WalkAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_5mri8")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_sprite_animation_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_sprite_animation_looped"]

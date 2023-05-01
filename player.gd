@@ -10,6 +10,8 @@ const FALL_TIME_TO_ANIMATE = 0.1
 
 @onready var sprite = $AnimatedSprite2D
 
+@onready var walk_audio = $WalkAudioStreamPlayer
+
 @onready var interact_left: Area2D = $interact_left
 @onready var interact_right: Area2D = $interact_right
 
@@ -36,6 +38,8 @@ func _physics_process(delta):
 		
 		if abs(velocity.x) > 0.1:
 			emit_signal("moved")
+			if !walk_audio.playing:
+				walk_audio.play()
 
 		if direction:
 			sprite.animation = &"walk"
