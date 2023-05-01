@@ -3,3 +3,5 @@
 
 *.kra-autosave.kra
 *.kra~
+
+export/**
