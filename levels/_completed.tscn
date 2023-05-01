@@ -60,7 +60,7 @@ func _on_submit_score_btn_pressed():
 			])
 	)
 
-func _on_player_name_text_submitted(new_text):
+func _on_player_name_text_submitted(_new_text):
 	_on_submit_score_btn_pressed()
 
 
